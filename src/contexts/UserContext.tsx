@@ -42,31 +42,32 @@ export function UserProvider({ children }: UserProviderProps) {
     const [userInfo, setUserInfo] = useState<UserFromGithub>();
     const [issues, setIssues] = useState<IssueFromGithub[]>([]);
 
-const getUserInfo = useCallback(
-    async () => {
-        try {
-            const { data } = await api.get(`${GITHUB_BASE_URL}/user`, {
-                headers: {
-                    Authorization: `token ${GITHUB_TOKEN}`
-                }
-            });           
-            
-            setUserInfo({
-                avatar_url: data.avatar_url,
-                html_url: data.html_url,
-                name: data.name,
-                bio: data.bio,
-                login: data.login,
-                company: data.company,
-                followers: data.followers                                  
-            });
-        } catch (error) {
-            console.error('Error fetching user info', error);
-            throw error;
-        }
-    },
-    []
-);
+
+    const getUserInfo = useCallback(
+        async () => {
+            try {
+                const { data } = await api.get(`${GITHUB_BASE_URL}/user`, {
+                    headers: {
+                        Authorization: `token ${GITHUB_TOKEN}`
+                    }
+                });           
+                
+                setUserInfo({
+                    avatar_url: data.avatar_url,
+                    html_url: data.html_url,
+                    name: data.name,
+                    bio: data.bio,
+                    login: data.login,
+                    company: data.company,
+                    followers: data.followers                                  
+                });
+            } catch (error) {
+                console.error('Error fetching user info', error);
+                throw error;
+            }
+        },
+        []
+    );
 
     async function getIssuesInfo(query: string) {
         try {

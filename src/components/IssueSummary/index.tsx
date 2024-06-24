@@ -50,7 +50,9 @@ export function IssueSummary({ issue }: IssueSummaryProps) {
                     </div>
                     <div className="iconAndStatusWrapper">
                         <FaComment />
-                        <span>{issue?.comments} Cometários</span>
+                        { issue &&
+                            <span>{issue?.comments} {issue?.comments > 1 ? 'Comentários' : 'Comentário'}</span>
+                        }
                     </div>
                 </div>
         </IssueSummaryContainer>
